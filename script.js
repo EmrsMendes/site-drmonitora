@@ -1,25 +1,32 @@
+const bancoDePlanos = {
+    carro: [
+        { nome: "Plano Básico", preco: "R$ 69,90/mês", descricao: "Monitoramento 24h via App" },
+        { nome: "Plano Intermediário", preco: "R$ 99,90/mês", descricao: "Monitoramento + Rastreador Físico" },
+        { nome: "Plano Premium", preco: "R$ 149,90/mês", descricao: "Proteção Total + Assistência Guincho" }
+    ],
+    moto: [
+        { nome: "Plano Básico", preco: "R$ 49,90/mês", descricao: "Monitoramento 24h via App" },
+        { nome: "Plano Intermediário", preco: "R$ 79,90/mês", descricao: "Monitoramento + Alarme Antifurto" },
+        { nome: "Plano Premium", preco: "R$ 119,90/mês", descricao: "Bloqueador Remoto + Assistência" }
+    ]
+};
+
 function simularPlanos() {
-    const select = document.getElementById("tipoVeiculo");
-    const tipo = select.value;
-    const nomeVeiculo = select.options[select.selectedIndex].text;
-    const areaPlanos = document.getElementById("areaPlanos");
+    const tipoSelecionado = document.getElementById("tipoVeiculo").value;
+    const areaDeExibicao = document.getElementById("areaPlanos");
+    const planos = bancoDePlanos[tipoSelecionado];
+
+    let htmlDosPlanos = `<h3>Melhores opções para ${tipoSelecionado.toUpperCase()}</h3>`;
     
-    // Tabela de preços
-    const tabela = {
-        leves: { "12 Meses": "R$ 79,00", "48 Meses": "R$ 62,90" },
-        utilitarios: { "12 Meses": "R$ 129,90", "48 Meses": "R$ 110,90" },
-        vans: { "12 Meses": "R$ 179,90", "48 Meses": "R$ 154,90" }
-    };
+    planos.forEach(plano => {
+        htmlDosPlanos += `
+            <div style="border: 2px solid #0056b3; margin: 15px auto; padding: 15px; border-radius: 8px; text-align: left; background-color: #f8f9fa; max-width: 400px;">
+                <h4 style="margin: 0 0 5px 0; color: #003b70;">${plano.nome}</h4>
+                <p style="margin: 0 0 10px 0; font-size: 14px; color: #555;">${plano.descricao}</p>
+                <strong style="font-size: 18px; color: #25D366;">${plano.preco}</strong>
+            </div>
+        `;
+    });
 
-    let html = `<div class="card-simulador"><h3>Tabela: ${nomeVeiculo}</h3><ul>`;
-    for(let plano in tabela[tipo]) {
-        html += `<li><strong>${plano}:</strong> ${tabela[tipo][plano]}/mês</li>`;
-    }
-    html += `</ul></div>`;
-    areaPlanos.innerHTML = html;
-
-    // ABRIR ZAP
-    const num = "5511999999999"; // COLOQUE SEU NÚMERO AQUI
-    const msg = encodeURIComponent(`Olá! Quero o plano para ${nomeVeiculo}.`);
-    window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+    areaDeExibicao.innerHTML = htmlDosPlanos;
 }
