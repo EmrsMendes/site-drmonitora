@@ -4,27 +4,36 @@ function simularPlanos() {
     const nomeVeiculo = select.options[select.selectedIndex].text;
     const areaPlanos = document.getElementById("areaPlanos");
     
+    // Tabela de preços
     const tabela = {
-        leves: { "48 Meses": "R$ 62,90", "36 Meses": "R$ 69,90", "24 Meses": "R$ 75,90", "12 Meses": "R$ 79,00" },
-        utilitarios: { "48 Meses": "R$ 110,90", "36 Meses": "R$ 116,90", "24 Meses": "R$ 122,90", "12 Meses": "R$ 129,90" },
-        vans: { "48 Meses": "R$ 154,90", "36 Meses": "R$ 162,90", "24 Meses": "R$ 170,90", "12 Meses": "R$ 179,90" }
+        leves: { "12 Meses": "R$ 79,00", "24 Meses": "R$ 75,90", "36 Meses": "R$ 69,90", "48 Meses": "R$ 62,90" },
+        utilitarios: { "12 Meses": "R$ 129,90", "24 Meses": "R$ 122,90", "36 Meses": "R$ 116,90", "48 Meses": "R$ 110,90" },
+        vans: { "12 Meses": "R$ 179,90", "24 Meses": "R$ 170,90", "36 Meses": "R$ 162,90", "48 Meses": "R$ 154,90" }
     };
 
-    let html = `<div style="max-width: 500px; margin: 0 auto; padding: 20px;"><h3>Tabela: ${nomeVeiculo}</h3>`;
+    let html = `<div class="card-simulador"><h3>Tabela: ${nomeVeiculo}</h3><ul>`;
     for(let plano in tabela[tipo]) {
-        html += `<div style="background:white; margin:10px 0; padding:15px; border-radius:8px; border:1px solid #ddd; display:flex; justify-content:space-between;">
-                 <span><strong>${plano}</strong></span><span style="color:#25D366; font-weight:bold;">${tabela[tipo][plano]}/mês</span></div>`;
+        html += `<li><strong>${plano}:</strong> ${tabela[tipo][plano]}/mês</li>`;
     }
-    html += `</div>`;
+    html += `</ul></div>`;
     areaPlanos.innerHTML = html;
 
-    // Configuração do WhatsApp
-    const seuNumeroWhatsApp = "81983587253"; // <--- EDITE AQUI!
+    // --- CONFIGURAÇÃO DO WHATSAPP ---
+    const seuNumero = "5511999999999"; // <--- EDITE AQUI
     const msg = `Olá! Vi a promoção no site. Tenho um ${nomeVeiculo} e quero o Plano Essencial.`;
-    const link = `https://wa.me/${seuNumeroWhatsApp}?text=${encodeURIComponent(msg)}`;
+    const linkFinal = `https://wa.me/${seuNumero}?text=${encodeURIComponent(msg)}`;
     
-    const btn = document.getElementById("linkWhatsapp");
-    btn.setAttribute("onclick", `window.open('${link}', '_blank')`);
-    btn.style.opacity = "1";
-    btn.style.pointerEvents = "auto";
+    const botao = document.getElementById("linkWhatsapp");
+    
+    // Se o botão existir, configuramos ele
+    if(botao) {
+        botao.onclick = function() {
+            window.open(linkFinal, '_blank');
+        };
+        botao.style.opacity = "1";
+        botao.style.pointerEvents = "auto";
+        alert("Simulação pronta! O botão de WhatsApp agora está ativado.");
+    } else {
+        alert("Erro: O botão do WhatsApp não foi encontrado no seu HTML.");
+    }
 }
