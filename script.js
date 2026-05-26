@@ -1,18 +1,25 @@
 function simularPlanos() {
-    // ... (seu código de cálculo de planos) ...
-
-    // --- CONFIGURAÇÃO DO WHATSAPP ---
-    const seuNumero = "5511999999999"; // <--- EDITE AQUI
-    const msg = `Olá! Vi a promoção no site. Tenho um ${nomeVeiculo} e quero o Plano Essencial.`;
-    const linkFinal = `https://wa.me/${seuNumero}?text=${encodeURIComponent(msg)}`;
+    const select = document.getElementById("tipoVeiculo");
+    const tipo = select.value;
+    const nomeVeiculo = select.options[select.selectedIndex].text;
+    const areaPlanos = document.getElementById("areaPlanos");
     
-    const botao = document.getElementById("linkWhatsapp");
-    
-    // Agora o botão sempre funciona, e ao clicar ele abre o link configurado
-    botao.onclick = function() {
-        window.open(linkFinal, '_blank');
+    // Tabela de preços
+    const tabela = {
+        leves: { "12 Meses": "R$ 79,00", "48 Meses": "R$ 62,90" },
+        utilitarios: { "12 Meses": "R$ 129,90", "48 Meses": "R$ 110,90" },
+        vans: { "12 Meses": "R$ 179,90", "48 Meses": "R$ 154,90" }
     };
-    
-    // Feedback visual para o cliente saber que a tabela carregou
-    alert("Tabela atualizada! O botão de WhatsApp já está pronto para o seu contato.");
+
+    let html = `<div class="card-simulador"><h3>Tabela: ${nomeVeiculo}</h3><ul>`;
+    for(let plano in tabela[tipo]) {
+        html += `<li><strong>${plano}:</strong> ${tabela[tipo][plano]}/mês</li>`;
+    }
+    html += `</ul></div>`;
+    areaPlanos.innerHTML = html;
+
+    // ABRIR ZAP
+    const num = "5511999999999"; // COLOQUE SEU NÚMERO AQUI
+    const msg = encodeURIComponent(`Olá! Quero o plano para ${nomeVeiculo}.`);
+    window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
 }
