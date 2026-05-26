@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DR.Monitora</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>DR.Monitora</h1>
+            <p>A melhor proteção e monitoramento para o seu veículo.</p>
+        </div>
+    </header>
+
+    <section class="card-simulador">
+        <h2>Simule o seu plano agora</h2>
+        <p>Selecione o tipo de veículo para ver nossas ofertas:</p>
+        
+        <select id="tipoVeiculo">
+            <option value="carro">Carro</option>
+            <option value="moto">Moto</option>
+        </select>
+        
+        <button onclick="simularPlanos()">Ver Planos Disponíveis</button>
+    </section>
+
+    <section id="areaPlanos"></section>
+
+    <footer>
+        <a href="#" class="btn-whatsapp">📞 Falar com Consultor no WhatsApp</a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
