@@ -55,7 +55,7 @@ function simularPlanos() {
 
     // --- CONFIGURAÇÃO DO WHATSAPP ---
     // COLOQUE SEU NÚMERO ABAIXO (Apenas números, com DDI 55 e o DDD)
-    const seuNumeroWhatsApp = "5511999999999"; 
+    const seuNumeroWhatsApp = "81983587253"; 
     
     const mensagemPronta = `Olá! Vi a promoção de entrada por R$ 1,00 no seu site. Tenho um(a) ${nomeVeiculo} e gostaria de fechar o meu Plano DR Essencial. Pode me ajudar?`;
     
